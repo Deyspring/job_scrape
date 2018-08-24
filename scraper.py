@@ -20,6 +20,19 @@ def simple_get(url):
         log_error('Error during requests to {0} : {1}'.format(url, str(e)))
         return None
 
+def get_urls():
+    """
+    Downloads the text where the list of urls is found
+    and returns a list with the name of the agency and it's url. """
+
+    """Set path for file and used open() fuction to open file and read it. """
+    with open(r"/Users/katherinedey/Desktop/job_scrape/water_jobs_test.txt", 'r') as infile:
+        data = infile.read()
+        print(data)
+
+    """
+    # Raise an exception if we failed to get any data from the text
+    raise Exception('Error retrieving contents at {}'.format(data)) """
 
 def is_good_response(resp):
     """
@@ -39,13 +52,14 @@ def log_error(e):
     """
     print(e)
 
+
 def get_names():
 
     """
     Downloads the page where the list of jobs is found
     and returns a list of strings, one per job
     """
-
+    
     url = 'http://www.btcsd.org/Employment_Opportunities/Employment.htm'
     response = simple_get(url)
 
@@ -66,12 +80,14 @@ if __name__ == '__main__':
 
     print('')
     print('Getting the list of jobs....')
+    get_urls()
     names = get_names()
     print('... done.\n')
 
-    
+    names.sort()
+    names.reverse()
 
-    print('\nThese jobs were found on these websites:\n')
+    print('\n Job scraping results on these websites:\n')
     for name in names:
         print('{}'.format(name))
 print('')
