@@ -21,19 +21,22 @@ def simple_get(url):
         return None
 
 def get_urls():
-    """
-    Downloads the text where the list of urls is found
+    """Downloads the text where the list of urls is found
     and returns a list with the name of the agency and it's url. """
 
-    """Set path for file and used open() fuction to open file and read it. """
+    #Set path for file and use open() fuction to open file and read it using 'r' as read option
     with open(r"/Users/katherinedey/Desktop/job_scrape/water_jobs_test.txt", 'r') as infile:
-        data = infile.read()
-        print(data)
+        # Raise an exception if we failed to get any data from the text file 
+        if infile.readline().strip() != 'Water District Jobs':
+            raise Exception('This is the wrong file')
+        for line in infile: 
+            if len(line) > 0:
+                line[:4] == 'http'
+                print (line)
+            else:
+                print (line)
 
-    """
-    # Raise an exception if we failed to get any data from the text
-    raise Exception('Error retrieving contents at {}'.format(data)) """
-
+    
 def is_good_response(resp):
     """
     Returns True if the response seems to be HTML, False otherwise.
@@ -55,11 +58,20 @@ def log_error(e):
 
 def get_names():
 
+    """ 
+    Uses district names and urls to then
+    download the page where the list of jobs is found
+    and returns the name of the township, the url and a list of strings, one per job.
     """
-    Downloads the page where the list of jobs is found
-    and returns a list of strings, one per job
+    """
+    Get a district name and print it. 
+    Get the matching url and print it. 
+    Find all the jobs in that url and then print them
+    If there is a problem scraping, print an error message. 
+    Repeat until all the district websites are scraped
     """
     
+
     url = 'http://www.btcsd.org/Employment_Opportunities/Employment.htm'
     response = simple_get(url)
 
@@ -80,17 +92,18 @@ if __name__ == '__main__':
 
     print('')
     print('Getting the list of jobs....')
-    get_urls()
     names = get_names()
     print('... done.\n')
 
     names.sort()
     names.reverse()
 
-    print('\n Job scraping results on these websites:\n')
+    print('\nJob scraping results on these websites:\n')
     for name in names:
         print('{}'.format(name))
 print('')
+
+get_urls()
 
     
 
