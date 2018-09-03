@@ -20,18 +20,25 @@ def simple_get(url):
         log_error('Error during requests to {0} : {1}'.format(url, str(e)))
         return None
 
-def get_urls():
-    """Downloads the text where the list of urls is found
-    and returns a list with the name of the agency and it's url. """
+def get_urls(file_name):
+    """ Extract list of name url pairs from given file. """
 
+    # take in a file name, create an array? that can hold a name and url
+    # take file name in from parameter
+    # create an array that can hold pairs of data
+    # append pairs of data to that array
+    # return array? 
+    urls = []
     #Set path for file and use open() fuction to open file and read it using 'r' as read option
-    with open(r"/Users/katherinedey/Desktop/job_scrape/water_jobs_test.txt", 'r') as infile:
+    # Note: research firs r, remove if necessary 
+    with open(file_name, 'r') as infile:
         # Raise an exception if we failed to get any data from the text file 
         if infile.readline().strip() != 'Water District Jobs':
             raise Exception('This is the wrong file')
         for line in infile: 
             if len(line) > 0:
-                line[:4] == 'http'
+        line[:4] != 'http'
+                url.append = line
                 print (line)
             else:
                 print (line)
@@ -61,16 +68,17 @@ def get_names():
     """ 
     Uses district names and urls to then
     download the page where the list of jobs is found
-    and returns the name of the township, the url and a list of strings, one per job.
+    and returns the name of the township, the url and a list of jobs, if any.
     """
     """
     Get a district name and print it. 
     Get the matching url and print it. 
-    Find all the jobs in that url and then print them
+    Find all the jobs at that url and print them.
     If there is a problem scraping, print an error message. 
     Repeat until all the district websites are scraped
     """
-    
+    # pass a url from the list of district to get_names function.
+    get_urls()
 
     url = 'http://www.btcsd.org/Employment_Opportunities/Employment.htm'
     response = simple_get(url)
@@ -103,7 +111,7 @@ if __name__ == '__main__':
         print('{}'.format(name))
 print('')
 
-get_urls()
+
 
     
 
