@@ -37,9 +37,9 @@ def get_urls(file_name):
             raise Exception('This is the wrong file')
         for line in infile: 
             if len(line) > 0:
-        line[:4] != 'http'
-                url.append = line
-                print (line)
+             line[:4] != 'http'
+             url.append = line
+             print (line)
             else:
                 print (line)
 
